@@ -7,6 +7,8 @@ import admin from 'firebase-admin';
 import { encrypt, decrypt } from './utils/cryptoUtils.js';
 // import { pool } from '../db/db.js'; // or wherever your pool is initialized
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+const serviceAccount = JSON.parse(fs.readFileSync('./serviceAccountKey.json', 'utf8'));
 
 env.config();
 const app = express();
@@ -21,9 +23,6 @@ const db = new pg.Client({
 })
 
 db.connect();
-
-// Firebase
-import serviceAccount from './serviceAccountKey.json' assert { type: 'json' };
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
