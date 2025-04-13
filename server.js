@@ -17,6 +17,7 @@ app.use(express.json());
 
 const db = new pg.Client({
   connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }, // For remote connections (adjust accordingly)
 })
 
 db.connect();
