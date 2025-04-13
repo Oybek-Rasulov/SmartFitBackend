@@ -3,7 +3,6 @@ node_modules/
 # Ignoring service account key and other sensitive files
 serviceAccountKey.json
 
-
 # Logs
 npm-debug.log*
 yarn-debug.log*
