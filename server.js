@@ -139,6 +139,7 @@ app.get('/trainers', async (req, res) => {
 app.post('/trainer', async (req, res) => {
     try {
         const {trainerid} = req.body;
+        console.log(trainerid)
         const result = await db.query("SELECT * FROM trainers WHERE trainerid = $1", [trainerid]);
         const trainer = result.rows;
         res.status(201).json(trainer);
@@ -322,7 +323,6 @@ app.get('/api/users', async (req, res) => {
     const { user_id, message } = req.body;
   
     try {
-
       const encryptedMessage = message ? encrypt(message) : null;
       await db.query(
         `INSERT INTO group_messages (group_id, user_id, message)
@@ -503,7 +503,7 @@ app.post('/submitRating', async (req, res) => {
     );
 
     // Return the new average rating
-    res.json({ newAverageRating: avgRatingResult.rows[0].avgRating });
+    res.status(201).json(avgRatingResult.rows[0]);
   } catch (error) {
     console.error('Error submitting rating:', error);
     res.status(500).json({ error: 'Internal Server Error' });
